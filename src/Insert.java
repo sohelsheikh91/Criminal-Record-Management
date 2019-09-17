@@ -1,18 +1,15 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.*;
+import java.sql.Statement;
 import java.util.Scanner;
 
-public class CriminalRecordManagment {
+public class Insert extends NewJDBC{
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection conn=null; 
-		conn= DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","CRIMINALRECORDMANAGMENT","9890165032");
+public void insert () throws SQLException, ClassNotFoundException {
+		
+		NewJDBC.Connection();
+		
 		Scanner in = new Scanner(System.in);
 		
 		System.out.println("Please Enter Criminal Details");
@@ -37,7 +34,7 @@ public class CriminalRecordManagment {
 		
 		System.out.println("Please Enter PUNISHMENT :");
 		String Pu = in.nextLine();
-//		
+
 		Statement st = conn.createStatement();
 		PreparedStatement mystr=null;
 		
@@ -92,5 +89,5 @@ public class CriminalRecordManagment {
 	}
 
 	}
-
+	
 }
