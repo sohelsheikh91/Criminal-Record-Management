@@ -14,7 +14,6 @@ public class View extends NewJDBC{
 		//System.out.println("CriminalID       Name        Type    CriminalDetails     BloodGroup   DNA  HealthCondition  Punishment  CrimeDate");
 		
 		while(s.next()) {
-			
 	
 			System.out.println("CriminalID : "+ s.getInt(1)+"| Name : "+
 			s.getString(2)+" Type : "+
@@ -25,6 +24,7 @@ public class View extends NewJDBC{
 			s.getString(7)+" Punishment : "+
 			s.getString(8)+" CrimeDate : "+
 			s.getDate(9)
+			
 			);	
 		}
 		

@@ -3,8 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class NewJDBC {
-	static Connection conn = null;
-	
+		static Connection conn = null;
 	
 		public static void Connection() throws ClassNotFoundException, SQLException {
 

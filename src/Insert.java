@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Insert extends NewJDBC{
 
-public void insert () throws SQLException, ClassNotFoundException {
+public void Details () throws SQLException, ClassNotFoundException {
 		
 		NewJDBC.Connection();
 		
@@ -89,5 +89,101 @@ public void insert () throws SQLException, ClassNotFoundException {
 	}
 
 	}
+
+public void location () throws ClassNotFoundException, SQLException {
+	
+	NewJDBC.Connection();
+	
+	Scanner in = new Scanner(System.in);
+	
+	System.out.println("Please Enter Criminals Location Details");
+	
+	System.out.print("Enter Cell No : ");
+	int cellno = in.nextInt();
+
+	System.out.print("Enter Jail Name :");
+	String jailname = in.nextLine();
+
+	System.out.println("Enter Criminal ID :");
+	int ID = in.nextInt();
+	
+	Statement st = conn.createStatement();
+	PreparedStatement mystr=null;
+	
+	try 
+	{
+		
+		
+		String sql = "insert into criminallocations values(?,?,?)";
+
+		mystr = conn.prepareStatement(sql);
+		mystr.setInt(1,cellno);
+		mystr.setString(2,jailname);
+		mystr.setInt(3,ID);
+		
+		mystr.executeUpdate();
+		
+		System.out.println();
+		conn.close();	
+		
+		
+	}
+	catch(Exception e)
+	{
+		System.out.println("Got an Exception");
+	}
+	
+}
+
+public void meetings() throws ClassNotFoundException, SQLException {
+
+	NewJDBC.Connection();
+	
+	Scanner in = new Scanner(System.in);
+	
+	System.out.println("Please Enter Outsider  Details");
+	
+	
+	System.out.print("Enter Cell No : ");
+	String name = in.nextLine();
+
+	System.out.print("Enter Jail Name :");
+	int criminalID = in.nextInt();
+
+
+	
+	Statement st = conn.createStatement();
+	PreparedStatement mystr=null;
+	
+	try 
+	{
+		ResultSet s = st.executeQuery("select max(srno) from criminalmeetings");
+		
+		s.next();
+		
+		int srno = s.getInt(1);
+	
+		String sql = "insert into criminalmeetings values(?,?,?,sysdate)";
+
+		mystr = conn.prepareStatement(sql);
+		
+		mystr.setInt(1,srno);
+		mystr.setString(2,name);
+		mystr.setInt(3,criminalID);
+		
+		mystr.executeUpdate();
+		
+		System.out.println();
+		conn.close();	
+		
+		
+	}
+	catch(Exception e)
+	{
+		System.out.println("Got an Exception");
+	}
+	
+	
+}
 	
 }
