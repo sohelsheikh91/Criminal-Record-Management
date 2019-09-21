@@ -8,6 +8,8 @@ public class JailSuperIntendant extends Insert {
 		p1.location();
 		p1.meetings();
 		
+		Delete d1 = new Delete();
+		d1.delete();
 //		Update u1 =new Update();
 //		u1.update("Fuck You", 2);
 //		

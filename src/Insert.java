@@ -107,7 +107,7 @@ public void location () throws ClassNotFoundException, SQLException {
 	System.out.println("Enter Criminal ID :");
 	int ID = in.nextInt();
 	
-	Statement st = conn.createStatement();
+	//Statement st = conn.createStatement();
 	PreparedStatement mystr=null;
 	
 	try 
