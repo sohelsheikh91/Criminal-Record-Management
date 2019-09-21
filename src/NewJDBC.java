@@ -11,16 +11,6 @@ public class NewJDBC {
 		
 		conn= DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","CRIMINALRECORDMANAGMENT","9890165032");
 		
-//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SYSTEM", "5545");
-//		if(conn!=null) {
-//			System.out.println("Connected");
-////			Statement st = conn.createStatement();
-////			st.executeUpdate("CREATE TABLE sohel{ID NUMBER;"
-////					+ "}");
-//		}
-//		else
-//			System.out.println("Notconnected");
-//		conn.close();
 	}
 
 }

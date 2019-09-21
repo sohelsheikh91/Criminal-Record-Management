@@ -4,7 +4,7 @@ import java.sql.Statement;
 
 public class Update extends NewJDBC{
 	
-	public void update(String punishment,int id) throws ClassNotFoundException, SQLException {
+	public void update(int id,String punishment) throws ClassNotFoundException, SQLException {
 		
 		
 		NewJDBC.Connection();
