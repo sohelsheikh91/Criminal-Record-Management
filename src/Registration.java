@@ -37,6 +37,7 @@ public class Registration extends NewJDBC  {
 			mystr.setString(2,user);
 			mystr.setString(3,Pass);
 			mystr.setString(4,Job);
+			mystr.executeQuery();
 			
 		}
 		catch(Exception e){
