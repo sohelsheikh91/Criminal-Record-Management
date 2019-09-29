@@ -2,6 +2,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Registration extends NewJDBC  {
 	
@@ -19,17 +21,50 @@ public class Registration extends NewJDBC  {
 		System.out.print("Enter Usename :");
 		String user = in.nextLine();
 
+		
 		System.out.println("Please Password :");
+		System.out.println("one uppercase letter , one lowercase letter, special character except" + 
+				"space and numbers. ");
 		String Pass = in.nextLine();
 		
-		System.out.println("Please job Profile :");
-		String Job = in.nextLine();
+		String Pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}$";
 		
+		
+		while(!Pass.matches(Pattern)) {
+			System.out.println("Please Enter Password in Specified Format");
+			Pass = in.nextLine();
+			
+		}
+		
+		System.out.println("1. Jail Superintendent.\r\n" + 
+				"2. Police Officers.\r\n" + 
+				"3. CBI Officers.\r\n" + 
+				"4. Administrator.\r\n" + 
+				"5. Judge\r\n"
+				+ "Enter 1 or 2 or 3 or 4 or 5");
+		int JobId = in.nextInt();
+		String Job = "";
+		
+		switch(JobId) {
+		
+		case 1 : Job = "Jailer";
+				break;
+		case 2 : Job = "Police";
+				break;
+		case 3 : Job = "CBI";
+				break;
+		case 4 : Job = "Admin";
+				break;
+		case 5 : Job = "Judge"; 
+				break;
+		
+		}
 		
 		Statement st = conn.createStatement();
 		PreparedStatement mystr=null;
+		
 		try {
-			String sql = "insert into registration  values(?,?,?,?,?,?,?,?,sysdate)";
+			String sql = "insert into registration values(?,?,?,?)";
 			
 			mystr = conn.prepareStatement(sql);
 			
