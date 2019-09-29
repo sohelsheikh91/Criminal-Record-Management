@@ -1,4 +1,5 @@
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -7,20 +8,41 @@ import java.util.regex.Pattern;
 
 public class Registration extends NewJDBC  {
 	
-	public void signup() throws ClassNotFoundException, SQLException {
+	public static void signup() throws ClassNotFoundException, SQLException {
 		
 		NewJDBC.Connection();
-		
+		Statement st = conn.createStatement();
 		Scanner in = new Scanner(System.in);
 		
 		System.out.println("Welcome to Criminal Record Managment");
 		
 		System.out.print("Enter Name :");
 		String Name = in.nextLine();
+		Boolean run  = true;
+		
+		String user = "";
+		try {
+		while(run == true) {
+			run = false;
+			System.out.print("Enter Usename :");
+			user = in.nextLine();
+		ResultSet s = st.executeQuery("select username from registration where username ="+"'"+user+"'");
 
-		System.out.print("Enter Usename :");
-		String user = in.nextLine();
-
+		s.next();
+		
+		String DBuser = s.getString(1);
+		
+		
+		if(user.equals( DBuser)) {
+			
+			System.out.println("Username Already Taken");
+			run = true;
+		}
+		
+		}}catch(Exception e) {
+			//System.out.println("Exception occured");
+			
+		}
 		
 		System.out.println("Please Password :");
 		System.out.println("one uppercase letter , one lowercase letter, special character except" + 
@@ -44,23 +66,34 @@ public class Registration extends NewJDBC  {
 				+ "Enter 1 or 2 or 3 or 4 or 5");
 		int JobId = in.nextInt();
 		String Job = "";
-		
+		run  = true;
+		while(run == true) {
+			run  = false;
+		if(JobId ==1 ||JobId ==2||JobId ==3||JobId ==4||JobId ==5) {
 		switch(JobId) {
 		
-		case 1 : Job = "Jailer";
-				break;
-		case 2 : Job = "Police";
-				break;
-		case 3 : Job = "CBI";
-				break;
-		case 4 : Job = "Admin";
-				break;
-		case 5 : Job = "Judge"; 
-				break;
+			case 1 : Job = "Jailer";
+					break;
+			case 2 : Job = "Police";
+					break;
+			case 3 : Job = "CBI";
+					break;
+			case 4 : Job = "Admin";
+					break;
+			case 5 : Job = "Judge"; 
+					break;
+			
+			}
 		
 		}
-		
-		Statement st = conn.createStatement();
+		else {
+			
+			System.out.println("Please Enter Valid Option");
+			run = true;
+			JobId = in.nextInt();
+		}
+		}
+	//	Statement st = conn.createStatement();
 		PreparedStatement mystr=null;
 		
 		try {
@@ -73,10 +106,10 @@ public class Registration extends NewJDBC  {
 			mystr.setString(3,Pass);
 			mystr.setString(4,Job);
 			mystr.executeQuery();
-			
+			System.out.println("Sucessfully Registred");
 		}
 		catch(Exception e){
-			
+			System.out.println("Please Enter Valid Information");
 			
 		}
 	}

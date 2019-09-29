@@ -11,7 +11,7 @@ public static void login() throws ClassNotFoundException, SQLException {
 		
 		Scanner in = new Scanner(System.in);
 		Boolean run  = true;
-		while(run = true) {
+		while(run == true) {
 		
 			try 
 			{
@@ -35,24 +35,31 @@ public static void login() throws ClassNotFoundException, SQLException {
 				
 				String DBpass = s.getString(1);
 				
-				System.out.println("Enter the Password");
+				//System.out.println("Enter the Password");
 				
 				
 				if(DBpass.equals(pass))
 				{
 					System.out.println("Login Succesuful");
+					s = st.executeQuery("select type from registration where username ="+"'"+user+"'");
+					s.next();
+					System.out.println(s.getString(1));
+				
 				}
 				else 
 				{
-					System.out.println("Please enter Correct Password"); 
+					System.out.println("Wrong Password");
+					System.out.println("Please enter Correct Password\n");
+					run = true;  
 				}
 				
 			}
 			catch(Exception e) {
-				e.printStackTrace();
-//				System.out.println(" Please Enter Valid Username");
-//				run = true;
-//				
+				
+				System.out.println("Invalid Credentials");
+				System.out.println("Please Enter Valid Username and Password \n");
+				run = true;
+				
 			}
 		}
 			in.close();

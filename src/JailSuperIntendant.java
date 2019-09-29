@@ -16,8 +16,8 @@ public class JailSuperIntendant extends Insert {
 //		View v1 = new View();
 //		v1.select();
 		//Login l1 = new Login();
-		Login.login();
-		
+	//	Login.login();
+		Registration.signup();
 		
 	}
 
