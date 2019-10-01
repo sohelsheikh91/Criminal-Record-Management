@@ -1,7 +1,9 @@
+import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Insert extends NewJDBC{
@@ -11,81 +13,112 @@ public void Details () throws SQLException, ClassNotFoundException {
 		NewJDBC.Connection();
 		
 		Scanner in = new Scanner(System.in);
-		
-		System.out.println("Please Enter Criminal Details");
-		
-		System.out.print("Enter Criminal name : ");
-		String Name = in.nextLine();
 
-		System.out.print("Enter Type of Criminal :");
-		String Type = in.nextLine();
-
-		System.out.println("Please Enter Crime Detail :");
-		String Cdetail = in.nextLine();
+		Boolean run  = true;
+		while(run == true) {
 		
-		System.out.println("Please Enter Blood Group :");
-		String BG = in.nextLine();
-		
-		System.out.println("Please Enter DNA :");
-		String DNA = in.nextLine();
-		
-		System.out.println("Please Enter Health :");
-		String Health = in.nextLine();
-		
-		System.out.println("Please Enter PUNISHMENT :");
-		String Pu = in.nextLine();
-
-		Statement st = conn.createStatement();
-		PreparedStatement mystr=null;
-		
-		try {
+			try 
+			{
+				run = false;
+				
+				System.out.println("Do you want to insert Single Criminal Record Or Multiple");
+				System.out.println("Press 1 for Single or Press 2 for Multiple");
+				int no = in.nextInt();
+				
+				
+				if( no==1||no==2) {
+//					System.out.println("How Many Records You want to enter");
+//				
+//					int NoRecords = in.nextInt();
+					ArrayList<NoOfCriminals> list = new ArrayList<NoOfCriminals>();
+					Boolean srun = true;
+					while(srun==true) {	
+					srun=false;
+					
+					NoOfCriminals criminal = new NoOfCriminals();
+					list.add(criminal);
+					
+					System.out.println("Please Enter Criminal Details");
+					in.nextLine();
+					System.out.print("Enter Criminal name : ");
+					criminal.setName(in.nextLine());
 			
-			ResultSet s = st.executeQuery("select max(criminalID) from criminaldetails");
-			s.next();
-			int Max = s.getInt(1);
+					System.out.print("Enter Type of Criminal :");
+					
+					criminal.setType(in.nextLine());
 			
-			++Max;
-			
-			String sql = "insert into criminaldetails  values(?,?,?,?,?,?,?,?,sysdate)";
-
-			mystr = conn.prepareStatement(sql);
-			mystr.setInt(1,Max);
-			mystr.setString(2,Name);
-			mystr.setString(3,Type);
-			mystr.setString(4,Cdetail);
-			mystr.setString(5,BG);
-			mystr.setString(6,DNA);
-			mystr.setString(7,Health);
-			mystr.setString(8,Pu);
-			
-			mystr.executeUpdate();
-			
-			System.out.println();
-			conn.close();	
-		}
-		catch(Exception e)
-		{
-			
-			System.out.println("Got an Exception");
-			
-		}
-		finally
-		{
-			if (mystr != null) {
-				mystr.close();
+					System.out.println("Please Enter Crime Detail :");
+	
+					criminal.setCdetails(in.nextLine());
+					
+					System.out.println("Please Enter Blood Group :");
+					
+					criminal.setBG(in.nextLine());
+					
+					
+					System.out.println("Please Enter DNA :");
+					
+					criminal.setDNA(in.nextLine());
+					
+					System.out.println("Please Enter Health :");
+					
+					criminal.setHealth(in.nextLine());
+					
+					System.out.println("Please Enter PUNISHMENT :");
+				
+					criminal.setPu(in.nextLine());
+					 if(no==2) {
+						System.out.println("Do You Want To Add More Record");
+						System.out.println("IF Yes Then Press 1 If No Then Any Other Key");
+						int tem = in.nextInt();
+						if(tem ==1)
+							srun =true;
+					 }
+				}
+					
+				Statement st = conn.createStatement();
+				PreparedStatement mystr=null;
+				
+				for(int i =0;i< list.size();i++) {
+				
+				ResultSet s = st.executeQuery("select max(criminalID) from criminaldetails");
+				s.next();
+				int Max = s.getInt(1);
+				
+				++Max;
+				
+				String sql = "insert into criminaldetails  values(?,?,?,?,?,?,?,?,sysdate)";
+	
+				mystr = conn.prepareStatement(sql);
+				mystr.setInt(1,Max);
+				mystr.setString(2,list.get(i).getName());
+				mystr.setString(3,list.get(i).getType());
+				mystr.setString(4,list.get(i).getCdetails());
+				mystr.setString(5,list.get(i).getBG());
+				mystr.setString(6,list.get(i).getDNA());
+				mystr.setString(7,list.get(i).getHealth());
+				mystr.setString(8,list.get(i).getPu());
+				
+				mystr.executeUpdate();
+				
+				System.out.println();
+				}
+				conn.close();	
+				}
+				else {
+					System.out.println("Invalid Input Entered");
+					run = true;
+				}
 			}
-
-			if (in != null) {
-				in.close();
+			
+			catch(Exception e)
+			{
+				
+				System.out.println("Invalid Input Please Enter Again");
+				run = true;
+				
 			}
-
-			if (conn != null) {
-				conn.close();
-			}
-
-		
-
-
+			
 	}
 
 	}
@@ -96,11 +129,16 @@ public void location () throws ClassNotFoundException, SQLException {
 	
 	Scanner in = new Scanner(System.in);
 	
+	
+	try {
+		
+	
 	System.out.println("Please Enter Criminals Location Details");
 	
 	System.out.print("Enter Cell No : ");
 	int cellno = in.nextInt();
-
+	
+	in.nextLine();
 	System.out.print("Enter Jail Name :");
 	String jailname = in.nextLine();
 
@@ -110,11 +148,8 @@ public void location () throws ClassNotFoundException, SQLException {
 	//Statement st = conn.createStatement();
 	PreparedStatement mystr=null;
 	
-	try 
-	{
 		
-		
-		String sql = "insert into criminallocations values(?,?,?)";
+		String sql = "insert into criminallocation values(?,?,?)";
 
 		mystr = conn.prepareStatement(sql);
 		mystr.setInt(1,cellno);
@@ -130,8 +165,11 @@ public void location () throws ClassNotFoundException, SQLException {
 	}
 	catch(Exception e)
 	{
-		System.out.println("Got an Exception");
+		System.out.println("Invalid Input Given Enter Different cell no");
+	
+	
 	}
+	
 	
 }
 
@@ -141,71 +179,24 @@ public void meetings() throws ClassNotFoundException, SQLException {
 	
 	Scanner in = new Scanner(System.in);
 	
-	System.out.println("Please Enter Outsider  Details");
-	
-	
-	System.out.print("Enter Cell No : ");
-	String name = in.nextLine();
-
-	System.out.print("Enter Jail Name :");
-	int criminalID = in.nextInt();
-
-
-	
-	Statement st = conn.createStatement();
-	PreparedStatement mystr=null;
-	
-	try 
-	{
-		ResultSet s = st.executeQuery("select max(srno) from criminalmeetings");
 		
-		s.next();
-		
-		int srno = s.getInt(1);
-	
-		String sql = "insert into criminalmeetings values(?,?,?,sysdate)";
-
-		mystr = conn.prepareStatement(sql);
-		
-		mystr.setInt(1,srno);
-		mystr.setString(2,name);
-		mystr.setInt(3,criminalID);
-		
-		mystr.executeUpdate();
-		
-		System.out.println();
-		conn.close();	
-		in.close();
-		
-	}
-	catch(Exception e)
-	{
-		System.out.println("Got an Exception");
-	}
-}
-
-public void punishment() throws ClassNotFoundException, SQLException {
-
-		NewJDBC.Connection();
-		
-		Scanner in = new Scanner(System.in);
-		
-		System.out.println("Please Enter punishment in years");
+		try {
+			
+		System.out.println("Please Enter Outsider  Details");
 		
 		
-		System.out.print("Enter Cell No : ");
+		System.out.println("Enter Outsider Name :");
 		String name = in.nextLine();
-
-		System.out.print("Enter Jail Name :");
+		
+		System.out.println("Enter Criminal ID:");
 		int criminalID = in.nextInt();
-
-
+	
+	
 		
 		Statement st = conn.createStatement();
 		PreparedStatement mystr=null;
 		
-		try 
-		{
+		
 			ResultSet s = st.executeQuery("select max(srno) from criminalmeetings");
 			
 			s.next();
@@ -213,7 +204,7 @@ public void punishment() throws ClassNotFoundException, SQLException {
 			int srno = s.getInt(1);
 		
 			String sql = "insert into criminalmeetings values(?,?,?,sysdate)";
-
+	
 			mystr = conn.prepareStatement(sql);
 			
 			mystr.setInt(1,srno);
@@ -229,9 +220,62 @@ public void punishment() throws ClassNotFoundException, SQLException {
 		}
 		catch(Exception e)
 		{
-			System.out.println("Got an Exception");
+			System.out.println("Invalid Input Given enter again");
+			
 		}
+	
+}
+
+//public void punishment() throws ClassNotFoundException, SQLException {
+//
+//		NewJDBC.Connection();
+//		
+//		Scanner in = new Scanner(System.in);
+//		Boolean run = true;
+//			while(run == true) {
+//				
+//			try {
+//			System.out.println("Please Enter punishment in years");
+//			
+//			
+//			System.out.print("Enter Cell No : ");
+//			String name = in.nextLine();
+//	
+//			System.out.print("Enter Jail Name :");
+//			int criminalID = in.nextInt();
+//	
+//	
+//			
+//			Statement st = conn.createStatement();
+//			PreparedStatement mystr=null;
+//			
+//			
+//				ResultSet s = st.executeQuery("select max(srno) from criminalmeetings");
+//				
+//				s.next();
+//				
+//				int srno = s.getInt(1);
+//			
+//				String sql = "insert into criminalmeetings values(?,?,?,sysdate)";
+//	
+//				mystr = conn.prepareStatement(sql);
+//				
+//				mystr.setInt(1,srno);
+//				mystr.setString(2,name);
+//				mystr.setInt(3,criminalID);
+//				
+//				mystr.executeUpdate();
+//				
+//				System.out.println();
+//				conn.close();	
+//				in.close();
+//				
+//			}
+//			catch(Exception e)
+//			{
+//				System.out.println("Invalid Input");
+//			}
 			
 }
 	
-}
+

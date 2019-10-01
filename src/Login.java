@@ -17,8 +17,7 @@ public static void login() throws ClassNotFoundException, SQLException {
 			{
 			
 				run = false;
-				
-					
+									
 				System.out.println("Enter the Username");
 				
 				String user = in.next();
@@ -36,21 +35,51 @@ public static void login() throws ClassNotFoundException, SQLException {
 				String DBpass = s.getString(1);
 				
 				//System.out.println("Enter the Password");
-				
+				String type="";
 				
 				if(DBpass.equals(pass))
 				{
 					System.out.println("Login Succesuful");
 					s = st.executeQuery("select type from registration where username ="+"'"+user+"'");
 					s.next();
-					System.out.println(s.getString(1));
-				
+					
+					type = s.getString(1); //Users Profile Captured
+					
+					s = st.executeQuery("select name from registration where username ="+"'"+user+"'");
+					s.next();
+					
+					String name = s.getString(1);
+					
+					switch(type) {
+					
+					case "Jailer" : JailSuperIntendant.Jailer(name);
+									break;
+					case "Police" : PoliceOffices.officer();
+									break;
+					case "CBI" : CBI_Officers.CBI();
+									break;
+					case "Admin" : Administrator.Admin();
+									break;
+					case "Judge" : Judge.judge();
+									break;
+					}
+					
 				}
 				else 
 				{
 					System.out.println("Wrong Password");
 					System.out.println("Please enter Correct Password\n");
 					run = true;  
+				}
+				switch(type) {
+					
+					case "Jailer":
+						break;
+					case "Police":break;
+					case "CBI":break;
+					case "Admin":break;
+					case "Judge":break;
+				
 				}
 				
 			}

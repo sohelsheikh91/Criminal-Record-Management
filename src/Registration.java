@@ -16,7 +16,7 @@ public class Registration extends NewJDBC  {
 		
 		System.out.println("Welcome to Criminal Record Managment");
 		
-		System.out.print("Enter Name :");
+		System.out.print("Enter Your Name :");
 		String Name = in.nextLine();
 		Boolean run  = true;
 		
@@ -24,7 +24,7 @@ public class Registration extends NewJDBC  {
 		try {
 		while(run == true) {
 			run = false;
-			System.out.print("Enter Usename :");
+			System.out.print("Enter the Usename :");
 			user = in.nextLine();
 		ResultSet s = st.executeQuery("select username from registration where username ="+"'"+user+"'");
 
@@ -40,11 +40,11 @@ public class Registration extends NewJDBC  {
 		}
 		
 		}}catch(Exception e) {
-			//System.out.println("Exception occured");
+			//System.out.println("Exception occurred");
 			
 		}
 		
-		System.out.println("Please Password :");
+		System.out.println("Please Enter New Password :");
 		System.out.println("one uppercase letter , one lowercase letter, special character except" + 
 				"space and numbers. ");
 		String Pass = in.nextLine();
@@ -58,7 +58,8 @@ public class Registration extends NewJDBC  {
 			
 		}
 		
-		System.out.println("1. Jail Superintendent.\r\n" + 
+		System.out.println("Select The JOB Profile\r\n"
+				+ "1. Jail Superintendent.\r\n" + 
 				"2. Police Officers.\r\n" + 
 				"3. CBI Officers.\r\n" + 
 				"4. Administrator.\r\n" + 
@@ -106,7 +107,27 @@ public class Registration extends NewJDBC  {
 			mystr.setString(3,Pass);
 			mystr.setString(4,Job);
 			mystr.executeQuery();
-			System.out.println("Sucessfully Registred");
+			System.out.println("Sucessfully Registred\r\n");
+			System.out.println("Do You Want to Login");
+			run=true;
+			while(run == true) {
+			run= false;
+			
+			System.out.println("Enter Yes or No");
+			String str = in.next();
+			if(str.toUpperCase()=="YES") {
+				
+				Login.login();
+			
+			}
+			else if(str.toUpperCase()=="NO") {
+				
+				System.out.println("Thank You");
+			}else {
+				System.out.println("Please Enter Valid Option");
+			run= true;
+			}
+			}
 		}
 		catch(Exception e){
 			System.out.println("Please Enter Valid Information");

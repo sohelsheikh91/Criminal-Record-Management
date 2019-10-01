@@ -7,11 +7,18 @@ public class Update extends NewJDBC{
 		
 		
 		NewJDBC.Connection();
+		try {
 		Statement st = conn.createStatement();
 		String sql = "update criminaldetails set punishment='"+punishment+"' where criminalid="+id;
-		int rowsaffected = st.executeUpdate(sql);
-		System.out.println("rows updated"+rowsaffected);
 		
+		int rowsaffected = st.executeUpdate(sql);
+		
+		System.out.println("rows updated"+rowsaffected);
+		}
+		catch(Exception e) {
+			
+			System.out.println("No Record Found Per Criminal ID");
+		}
 	}
 	
 
