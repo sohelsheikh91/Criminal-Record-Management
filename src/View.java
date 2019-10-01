@@ -23,7 +23,7 @@ Boolean run = true;
 		int no1 = in.nextInt();
 		if(no1 ==1) {
 		
-		String sql = "Select * from CriminalDetails order by CriminalID";
+		String sql = "select * from CriminalDetails order by CriminalID";
 		ResultSet s = st.executeQuery(sql);
 		//System.out.println("CriminalID       Name        Type    CriminalDetails     BloodGroup   DNA  HealthCondition  Punishment  CrimeDate");
 		
@@ -60,7 +60,7 @@ Boolean run = true;
 	}catch(Exception e) {
 		
 		System.out.println("DataBase Exception No Record Found");
-		run = true;
+		//run = true;
 	}
 	}
 

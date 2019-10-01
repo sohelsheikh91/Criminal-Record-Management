@@ -10,7 +10,7 @@ public class CriminalRecordManagment {
 	System.out.println("Do you want to Register or Login");
 	Boolean run = true;
 	while(run==true) {
-		
+		run = false;
 		try {
 						
 				System.out.println("Press 1 for Registration or 2 for Login");
@@ -28,7 +28,8 @@ public class CriminalRecordManagment {
 					run = true;
 				}
 				
-		}
+	
+			}
 		catch(Exception e)
 		{
 			
@@ -37,6 +38,7 @@ public class CriminalRecordManagment {
 		}
 	
 	}
+	
 	
 }
 }

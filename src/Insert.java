@@ -145,7 +145,7 @@ public void location () throws ClassNotFoundException, SQLException {
 	System.out.println("Enter Criminal ID :");
 	int ID = in.nextInt();
 	
-	//Statement st = conn.createStatement();
+	Statement st = conn.createStatement();
 	PreparedStatement mystr=null;
 	
 		
@@ -158,15 +158,13 @@ public void location () throws ClassNotFoundException, SQLException {
 		
 		mystr.executeUpdate();
 		
-		System.out.println();
-		conn.close();	
-		in.close();
+		
 		
 	}
 	catch(Exception e)
 	{
 		System.out.println("Invalid Input Given Enter Different cell no");
-	
+		
 	
 	}
 	
@@ -179,8 +177,11 @@ public void meetings() throws ClassNotFoundException, SQLException {
 	
 	Scanner in = new Scanner(System.in);
 	
+	Boolean run = true;
+	while(run == true) {
 		
-		try {
+	try {
+		run = false;
 			
 		System.out.println("Please Enter Outsider  Details");
 		
@@ -207,22 +208,24 @@ public void meetings() throws ClassNotFoundException, SQLException {
 	
 			mystr = conn.prepareStatement(sql);
 			
-			mystr.setInt(1,srno);
+			mystr.setInt(1,srno+1);
 			mystr.setString(2,name);
 			mystr.setInt(3,criminalID);
 			
 			mystr.executeUpdate();
-			
+			System.out.println("SuccessFully Updated\n");
 			System.out.println();
-			conn.close();	
-			in.close();
-			
+//			conn.close();	
+//			in.close();
+//			
 		}
 		catch(Exception e)
 		{
 			System.out.println("Invalid Input Given enter again");
-			
+			run = true;
+					in.nextLine();
 		}
+	}
 	
 }
 

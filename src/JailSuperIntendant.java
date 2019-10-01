@@ -11,16 +11,15 @@ public class JailSuperIntendant extends Insert {
 		
 		while(run == true ) {
 			
+			
 		try {
 			
 		run= false;
 		
-		
-		
 			Insert p1 = new Insert();
-			p1.Details();
-			p1.location();
-			p1.meetings();
+			//p1.Details();
+			//p1.location();
+			//p1.meetings();
 			System.out.println("Do you want Insert More Record");
 			System.out.println("Press 1 for Yes or Any Other Key For Next Menu");
 			int no1 = in.nextInt();
@@ -29,8 +28,6 @@ public class JailSuperIntendant extends Insert {
 			else
 				System.out.println("Succesfully LogOut");
 			
-				
-		
 		}
 		
 		catch(Exception e){
