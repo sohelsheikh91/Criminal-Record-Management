@@ -10,23 +10,22 @@ public class JailSuperIntendant extends Insert {
 		Boolean run = true;
 		
 		while(run == true ) {
-			
+			run= false;
 			
 		try {
 			
-		run= false;
+	
 		
 			Insert p1 = new Insert();
 			//p1.Details();
-			//p1.location();
+			p1.location();
 			//p1.meetings();
 			System.out.println("Do you want Insert More Record");
 			System.out.println("Press 1 for Yes or Any Other Key For Next Menu");
 			int no1 = in.nextInt();
 			if(no1 ==1)
 				run = true;
-			else
-				System.out.println("Succesfully LogOut");
+			
 			
 		}
 		
@@ -36,6 +35,7 @@ public class JailSuperIntendant extends Insert {
 			run = true;
 		}
 		}
+		run = true;
 //		Insert p1 = new Insert();
 //		p1.Details();
 //		p1.location();
@@ -44,7 +44,11 @@ public class JailSuperIntendant extends Insert {
 	//	Delete d1 = new Delete();
 		//d1.delete();
 //		Update u1 =new Update();
-//		
+		while(run == true ) {
+		run= false;
+		
+
+		
 		try
 		{
 		System.out.println("Do you want View Record");
@@ -63,8 +67,8 @@ public class JailSuperIntendant extends Insert {
 		}
 		catch(Exception e){
 			
-			System.out.println("Invalid Input");
-			
+			System.out.println("Invalid Input Given");
+			run = true;
 		}
 		
 		//Login l1 = new Login();
@@ -72,5 +76,6 @@ public class JailSuperIntendant extends Insert {
 	//	Registration.signup();
 		
 	}
+		}
 
 }

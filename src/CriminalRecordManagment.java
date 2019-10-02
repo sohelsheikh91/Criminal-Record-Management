@@ -30,11 +30,15 @@ public class CriminalRecordManagment {
 				
 	
 			}
+		catch(SQLException se){
+		      
+		      System.out.println("Similar Record Found Enter Different CriminalID");
+		   }
 		catch(Exception e)
 		{
 			
-				System.out.println("Invalid Input");
-				
+				System.out.println("Invalid Input Given");
+				run = true;
 		}
 	
 	}

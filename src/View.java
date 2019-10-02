@@ -9,15 +9,16 @@ public class View extends NewJDBC{
 	
 		NewJDBC.Connection();
 		Scanner in = new Scanner(System.in);
-Boolean run = true;
+		Boolean run = true;
 		
 		while(run == true ) {
+			run = false; 
 			
-	try {
-		run = false; 
+		try {
+		
 	
 		System.out.println("What Do you want View Criminal Record or OutSider Meeting Record");
-		System.out.println("Press 1 for Yes or Press 2  for LogOut");
+		System.out.println("Press 1 for Criminal Record or Press 2 for OutSider Meeting Record");
 		Statement st = conn.createStatement();
 		
 		int no1 = in.nextInt();
@@ -56,7 +57,9 @@ Boolean run = true;
 			
 			);	
 		}
+		
 		}
+		
 	}catch(Exception e) {
 		
 		System.out.println("DataBase Exception No Record Found");

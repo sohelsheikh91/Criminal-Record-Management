@@ -6,9 +6,13 @@ public class Judge {
 	public static void judge() throws ClassNotFoundException, SQLException {
 		
 		Scanner in = new Scanner(System.in);
+		Boolean run = true;
+		
+		while(run == true ) {
+			run = false; 
 		System.out.println("Following are Menu Options");
 		System.out.println("Press 1 for View\n"
-				+ " Press 2 for Insert\n"
+				+ "Press 2 for Insert\n"
 				+ "Press 3 for Update\n"
 				+ "Press 4 for Delete\n");
 		
@@ -28,6 +32,7 @@ public class Judge {
 			Update u1 =new Update();
 			System.out.println("Please enter Criminal ID and Punishment for criminal ");
 			int no = in.nextInt();
+			in.nextLine();
 			String str = in.nextLine();
 			u1.update(no, str);
 		}
@@ -37,7 +42,20 @@ public class Judge {
 			d1.delete();
 			
 		}
-		in.close();
+		
+		System.out.println("Do You Want To LogOut Press 1 for Yes 2 for No");
+		int no = in.nextInt();
+		if(no ==1) {
+		System.out.println("LogOut Succesfully");
+		
+		}
+		else if (no==2) {
+		
+			run =true;
+		
+		}
+		
+	}
 	}
 	
 }

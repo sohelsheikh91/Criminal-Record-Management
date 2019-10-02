@@ -128,8 +128,9 @@ public void location () throws ClassNotFoundException, SQLException {
 	NewJDBC.Connection();
 	
 	Scanner in = new Scanner(System.in);
-	
-	
+	Boolean run = true;
+	while(run == true) {
+		run=false;
 	try {
 		
 	
@@ -160,15 +161,19 @@ public void location () throws ClassNotFoundException, SQLException {
 		
 		
 		
-	}
+	}catch(SQLException se){
+	      
+	      System.out.println("Similar Record Found Enter Different CriminalID");
+	      run = true;
+	   }
 	catch(Exception e)
 	{
 		System.out.println("Invalid Input Given Enter Different cell no");
-		
+		run= true;
 	
 	}
 	
-	
+	}
 }
 
 public void meetings() throws ClassNotFoundException, SQLException {
